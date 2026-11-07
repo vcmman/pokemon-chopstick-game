@@ -34,3 +34,26 @@ test('stop works during play and between levels, and retry resets session progre
  state=reduce(state,event('start',9000));
  assert.equal(state.total,0);assert.equal(state.level,0);assert.equal(state.deadline,69000);
 });
+test('difficulty switches immediately without resetting an active round or bypassing its deadline',()=>{
+ let state=reduce(initialRound,event('start'));
+ state=reduce(state,event('catch',2000));
+ for(const difficulty of [2,0,1]){
+  const changed=reduce(state,{type:'difficulty',difficulty,now:3000});
+  assert.equal(changed.difficulty,difficulty);
+  for(const field of ['deadline','caught','total','level','remaining','status'])assert.equal(changed[field],state[field]);
+  state=changed;
+ }
+ for(const difficulty of [-1,3,1.5])assert.equal(reduce(state,{type:'difficulty',difficulty,now:3000}),state);
+ assert.equal(reduce(state,{type:'difficulty',difficulty:2,now:state.deadline}).status,'lost');
+});
+test('difficulty can be selected before starting and still increases with progression',()=>{
+ let state=reduce(initialRound,{type:'difficulty',difficulty:1,now:0});
+ state=reduce(state,event('start'));
+ assert.equal(state.difficulty,1);
+ for(let n=0;n<5;n++)state=reduce(state,event('catch'));
+ state=reduce(state,event('next'));
+ assert.equal(state.difficulty,1);
+ for(let n=0;n<8;n++)state=reduce(state,event('catch'));
+ state=reduce(state,event('next'));
+ assert.equal(state.difficulty,2);
+});
