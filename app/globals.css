@@ -16,3 +16,5 @@
 .belt-friend img{display:block;width:90px;height:102px;margin:auto}
 .tile img{width:70px;height:80px}
 @media(max-width:480px){.belt-friend{top:119px;width:70px}.belt-friend img{width:70px;height:90px}.friend{top:104px;width:116px}.friend img{width:116px;height:128px}.tile img{width:64px;height:74px}}
+
+.round-panel .minimum-rule{background:#fff1ca;color:#795617;border-radius:12px;padding:10px 12px;font-size:13px}.level-goals{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0}.level-goals span{padding:8px 12px;border:1px solid #dcc8e9;border-radius:12px;font-size:13px;background:#f5eefb}.level-goals b{color:#735aa6}

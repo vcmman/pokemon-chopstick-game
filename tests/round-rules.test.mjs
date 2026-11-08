@@ -57,3 +57,24 @@ test('difficulty can be selected before starting and still increases with progre
  state=reduce(state,event('next'));
  assert.equal(state.difficulty,2);
 });
+for (const [level,minimum] of GOALS.entries()) {
+ test(`level ${level+1} requires its own minimum of ${minimum} catches before it can pass`,()=>{
+  let state=reduce(initialRound,event('start'));
+  for(let previous=0;previous<level;previous++){
+   for(let i=0;i<GOALS[previous];i++)state=reduce(state,event('catch'));
+   state=reduce(state,event('next'));
+  }
+  assert.equal(state.level,level);
+  assert.equal(state.caught,0,'previous levels must not count towards this minimum');
+  for(let i=0;i<minimum-1;i++)state=reduce(state,event('catch'));
+  assert.equal(state.status,'playing');
+  assert.equal(reduce(state,event('next')).level,level,'cannot enter next level below the minimum');
+  const failed=reduce(state,event('tick',state.deadline));
+  assert.equal(failed.status,'lost');
+  assert.equal(failed.caught,minimum-1);
+  assert.equal(reduce(failed,event('next')),failed);
+  const passed=reduce(state,event('catch',state.deadline-1));
+  assert.equal(passed.caught,minimum);
+  assert.equal(passed.status,level===2?'won':'cleared');
+ });
+}
