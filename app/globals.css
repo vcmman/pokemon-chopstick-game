@@ -6,3 +6,13 @@
 .round-panel{max-width:860px;margin:18px auto 0;background:#fffdf6;border:4px solid white;border-radius:24px;padding:18px 22px;box-shadow:0 5px 0 #dcc6a8}.round-panel.in-play{position:relative}.round-stats{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:15px}.round-stats strong{font-size:20px;color:#735aa6}.round-stats .time-low{color:#b94142}.round-panel progress{width:100%;height:15px;margin-top:12px;accent-color:#735aa6}.round-panel p{font-size:13px;line-height:1.7;margin:8px 0}.round-result{text-align:center;padding:20px 5px}.round-result h1{font-size:clamp(23px,5vw,34px)}.round-start{display:block;margin:20px auto 10px;border:0;border-radius:17px;padding:17px 28px;background:#735aa6;color:white;font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 5px 0 #4c3975}.end-round{background:transparent;color:#735aa6;border:1px solid #cdbbdf;padding:6px 12px;border-radius:12px;font-size:12px;cursor:pointer;margin-top:7px}.round-note{color:#8a7b91}.mode-picker button:disabled{cursor:default;opacity:.65}.round-start:focus-visible,.end-round:focus-visible{outline:3px solid #eab047;outline-offset:4px}[hidden]{display:none!important}@media(max-width:480px){.round-panel{margin:12px 9px 0;padding:14px}.round-stats{font-size:12px}}
 
 .round-panel .difficulty{margin:0 0 6px;flex-wrap:wrap}.round-panel .difficulty button{min-height:44px;min-width:76px;touch-action:manipulation}.round-panel .difficulty-help{text-align:center;font-size:12px;color:#806b92;margin:0 0 12px}.difficulty button:focus-visible{outline:3px solid #eab047;outline-offset:3px}
+
+/* Standalone character sprites keep ears, wings and tails instead of cropping portraits. */
+.friend{top:102px;width:128px}
+.friend img,.belt-friend img,.tile img{object-fit:contain;object-position:center bottom;border:0;border-radius:0;box-shadow:none;background:transparent;filter:drop-shadow(0 4px 3px #493e6533)}
+.friend img{width:128px;height:140px}
+.catch .friend img{filter:drop-shadow(0 0 7px #ffc64d)}
+.belt-friend{top:112px;width:90px}
+.belt-friend img{display:block;width:90px;height:102px;margin:auto}
+.tile img{width:70px;height:80px}
+@media(max-width:480px){.belt-friend{top:119px;width:70px}.belt-friend img{width:70px;height:90px}.friend{top:104px;width:116px}.friend img{width:116px;height:128px}.tile img{width:64px;height:74px}}
